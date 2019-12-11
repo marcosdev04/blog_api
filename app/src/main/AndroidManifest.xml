@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ItemPost"></activity>
+        <activity android:name=".VisualizarActivity"></activity>
+        <activity android:name=".CrearPost" />
+        <activity android:name=".ItemPost" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginApi">

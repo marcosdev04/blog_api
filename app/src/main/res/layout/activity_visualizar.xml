@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VisualizarActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#01579B"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTitleD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TITULO DEL POST"
+                    android:textAlignment="center"
+                    android:textColor="#F5F4F4"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtCreatedD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="11/12/2019"
+                    android:textAlignment="textEnd"
+                    android:textAllCaps="false"
+                    android:textColor="#FDFFFFFF"
+                    android:textStyle="bold|italic" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etBodyD"
+                    android:layout_width="match_parent"
+                    android:layout_height="150sp"
+                    android:layout_marginTop="20sp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTagsD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="[,]"
+                    android:textAlignment="textEnd" />
+
+                <LinearLayout
+                    android:layout_width="410sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="5sp"
+                    android:paddingRight="5sp">
+
+                    <TextView
+                        android:id="@+id/txtLikesD"
+                        android:layout_width="130sp"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/liked"
+                        android:paddingLeft="5sp"
+                        android:text="Likes" />
+
+                    <TextView
+                        android:id="@+id/txtViewsD"
+                        android:layout_width="130sp"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/views"
+                        android:text="Views" />
+
+                    <TextView
+                        android:id="@+id/txtCommentsD"
+                        android:layout_width="130sp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/comments"
+                        android:text="Comments" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Creater By: "
+                        android:textColor="#01579B"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtCreatorD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Marcos Felipe" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10sp">
+
+                <EditText
+                    android:id="@+id/etNewComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="agregar comentario"
+                    android:inputType="textPersonName" />
+
+                <Button
+                    android:id="@+id/btnAddCommentD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPostDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scrollbars="vertical"
+                    android:background="@android:color/darker_gray"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

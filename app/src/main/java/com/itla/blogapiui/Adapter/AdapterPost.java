@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.AdapterPostVie
 
     public interface OnItemClickListener{
         void onItemClick(int position);
+        void onOpenClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
@@ -58,7 +60,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.AdapterPostVie
         Integer cLikes = currentPost.getLikesPost();
         Integer cComments = currentPost.getComments();
         Integer cViews = currentPost.getViews();
-        String cCreator = currentPost.getUserEmail();
+        String cCreator = currentPost.getUserName();
 
         String longV = currentPost.getCreatedAt().toString();
         long millisecond = Long.parseLong(longV);
@@ -87,8 +89,9 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.AdapterPostVie
     public class AdapterPostViewHolder extends RecyclerView.ViewHolder{
         public TextView txtTitle, txtTags, txtDate, txtBody, txtLikes
                 , txtComments,txtViews, txtCreator;
+        Button btnAbrirPost;
 
-        public AdapterPostViewHolder(@NonNull View itemView) {
+        public AdapterPostViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             txtTitle = itemView.findViewById(R.id.txtTitle);
@@ -99,6 +102,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.AdapterPostVie
             txtComments = itemView.findViewById(R.id.txtComments);
             txtViews = itemView.findViewById(R.id.txtViews);
             txtCreator = itemView.findViewById(R.id.txtCreator);
+            btnAbrirPost = itemView.findViewById(R.id.btnOpen);
 
             itemView.findViewById(R.id.txtLikes).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -107,6 +111,18 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.AdapterPostVie
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
                             mListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+
+            itemView.findViewById(R.id.btnOpen).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            mListener.onOpenClick(position);
                         }
                     }
                 }

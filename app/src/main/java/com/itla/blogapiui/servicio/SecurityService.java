@@ -1,5 +1,6 @@
 package com.itla.blogapiui.servicio;
 
+import com.itla.blogapiui.entidades.Comment;
 import com.itla.blogapiui.entidades.Login;
 import com.itla.blogapiui.entidades.Post;
 import com.itla.blogapiui.entidades.Regist;
@@ -40,4 +41,16 @@ Call<Void> likePost(@Path("id") int id, @HeaderMap Map<String, String> headers);
 @DELETE("post/{id}/like")
 Call<Void> dislikePost(@Path("id") int id, @HeaderMap Map<String, String> headers);
 
+@POST("post")
+Call<Post> createPost(@Body Post post,@Header("Authorization") String header);
+
+@GET("post/{id}")
+Call<Post> getOnePost(@Path("id") int id,@Header("Authorization") String header);
+
+@GET("post/{id}/comment")
+Call<List<Comment>> getComments(@Path("id") int id, @Header("Authorization") String header);
+
+@POST("post/{id}/commment")
+Call<Void> newComment(@Path("id") int idpost,@Body String body,
+                      @Header("Authorization") String header);
 }

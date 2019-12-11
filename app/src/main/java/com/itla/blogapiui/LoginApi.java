@@ -28,10 +28,21 @@ public class LoginApi extends AppCompatActivity {
     EditText edUser, edPassword;
     String token;
 
+    SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_api);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        token =(preferences.getString("token", "Default_Value"));
+
+        if(preferences.contains("token")) {
+            Intent main_activity = new Intent(this,MainActivity.class);
+            startActivity(main_activity);
+            finish();
+        }
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegistrar = (Button) findViewById(R.id.btnRegistrarse);
