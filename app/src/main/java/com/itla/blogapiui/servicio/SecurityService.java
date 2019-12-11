@@ -50,7 +50,7 @@ Call<Post> getOnePost(@Path("id") int id,@Header("Authorization") String header)
 @GET("post/{id}/comment")
 Call<List<Comment>> getComments(@Path("id") int id, @Header("Authorization") String header);
 
-@POST("post/{id}/commment")
-Call<Void> newComment(@Path("id") int idpost,@Body String body,
+@POST("post/{id}/comment")
+Call<Comment> newComment(@Path("id") int id,@Body Comment comment,
                       @Header("Authorization") String header);
 }

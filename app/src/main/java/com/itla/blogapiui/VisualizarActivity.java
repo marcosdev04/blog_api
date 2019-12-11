@@ -61,6 +61,7 @@ public class VisualizarActivity extends AppCompatActivity {
         etBodyD = (EditText) findViewById(R.id.etBodyD);
         txtLikesD = (TextView) findViewById(R.id.txtLikesD);
         btnAddNewComment = (Button) findViewById(R.id.btnAddCommentD);
+        etNewComment = (EditText) findViewById(R.id.etNewComment);
 
         Bundle bundle = getIntent().getExtras();
         id = bundle.getInt("id");
@@ -78,10 +79,36 @@ public class VisualizarActivity extends AppCompatActivity {
         btnAddNewComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String newComment = etNewComment.getText().toString();
+                insertItem(newComment);
             }
         });
 
+
+    }
+
+    public void insertItem(String newComment){
+
+        Comment comment = new Comment();
+        comment.setBody(newComment);
+
+        Call<Comment> commentCall = securityService.newComment(id,comment,"Bearer " + token);
+        commentCall.enqueue(new Callback<Comment>() {
+            @Override
+            public void onResponse(Call<Comment> call, Response<Comment> response) {
+                if(response.isSuccessful()){
+                    loadComments();
+                    adapterComment.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(VisualizarActivity.this,"ERROR CODE " + response.code(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Comment> call, Throwable t) {
+
+            }
+        });
     }
 
     private void loadComments() {
