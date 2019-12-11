@@ -1,6 +1,7 @@
 package com.itla.blogapiui.Adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.itla.blogapiui.ItemPost;
@@ -50,6 +52,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.AdapterPostVie
         return new AdapterPostViewHolder(v);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull AdapterPostViewHolder holder, int position) {
         Post currentPost = pAdapterList.get(position);
@@ -69,7 +72,11 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.AdapterPostVie
         // Asignar los valores a los EditText
         holder.txtBody.setText(tBody);
         holder.txtTitle.setText(tTitle);
-        holder.txtTags.setText(tTags.toString());
+
+        List<String> text = tTags;
+        String tags = String.join(", ", text);
+        holder.txtTags.setText(tags);
+
         holder.txtDate.setText(tDate);
         holder.txtLikes.setText(cLikes.toString());
         holder.txtComments.setText(cComments.toString());

@@ -1,5 +1,6 @@
 package com.itla.blogapiui;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
@@ -115,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements AdapterPost.OnIte
 
         cposts.enqueue(new Callback<List<Post>>() {
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
@@ -132,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements AdapterPost.OnIte
                     pShow.setId(post.getId());
                     pShow.setTitle(post.getTitle());
                     pShow.setBody(post.getBody());
+
                     pShow.setTags(post.getTags());
                     pShow.setCreatedAt(post.getCreatedAt());
 

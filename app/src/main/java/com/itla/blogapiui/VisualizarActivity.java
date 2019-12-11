@@ -1,10 +1,13 @@
 package com.itla.blogapiui;
 
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
@@ -22,6 +25,7 @@ import com.itla.blogapiui.servicio.BlogApiServices;
 import com.itla.blogapiui.servicio.SecurityService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -162,6 +166,7 @@ public class VisualizarActivity extends AppCompatActivity {
         Call<Post> cpost = securityService.
                             getOnePost(id,"Bearer " + token);
         cpost.enqueue(new Callback<Post>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 if(response.isSuccessful()){
@@ -175,6 +180,17 @@ public class VisualizarActivity extends AppCompatActivity {
 
                     txtCreateAtD.setText(tDate);
                     txtLikesD.setText(String.valueOf(response.body().getLikesPost()));
+
+                    if(response.body().isLiked() != true) {
+                        txtLikesD.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.desliked, 0, 0, 0);
+                    }
+
+                    // create character list and initialize
+                    List<String> tags = response.body().getTags();
+
+                    String joined = String.join(", ", tags);
+
+                    txtTagsD.setText(joined);
                     txtCommentsD.setText(String.valueOf(response.body().getComments()));
                     txtViewsD.setText(String.valueOf(response.body().getViews()));
                     etBodyD.setText(response.body().getBody().toString());
