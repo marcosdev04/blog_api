@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.itla.blogapiui.servicio.SecurityService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -166,7 +168,12 @@ public class VisualizarActivity extends AppCompatActivity {
 //                    Toast.makeText(VisualizarActivity.this,"EXITO",Toast.LENGTH_LONG).show();
                     Post post = new Post();
                     txtTitleD.setText(response.body().getTitle().toString());
-                    txtCreateAtD.setText(response.body().getCreatedAt().toString());
+
+                    String longV = response.body().getCreatedAt().toString();
+                    long millisecond = Long.parseLong(longV);
+                    String tDate = DateFormat.format("MM/dd/yyyy", new Date(millisecond)).toString();
+
+                    txtCreateAtD.setText(tDate);
                     txtLikesD.setText(String.valueOf(response.body().getLikesPost()));
                     txtCommentsD.setText(String.valueOf(response.body().getComments()));
                     txtViewsD.setText(String.valueOf(response.body().getViews()));
@@ -182,5 +189,9 @@ public class VisualizarActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
+
+
 }
