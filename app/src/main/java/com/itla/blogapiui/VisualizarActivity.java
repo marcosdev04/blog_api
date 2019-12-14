@@ -90,7 +90,12 @@ public class VisualizarActivity extends AppCompatActivity {
             }
         });
 
+        txtLikesD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     public void insertItem(String newComment){

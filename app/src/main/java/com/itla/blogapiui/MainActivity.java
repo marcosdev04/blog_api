@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements AdapterPost.OnIte
 
     String token = "";
     SharedPreferences mSharedPreference;
+    boolean liked_post;
 
     final SecurityService securityService = BlogApiServices
             .getInstance()
@@ -101,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements AdapterPost.OnIte
     }
 
     public void fillPost() {
+
         txtLikes = findViewById(R.id.txtLikes);
 
         pRecyclerView = findViewById(R.id.postRecyclerView);
@@ -150,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements AdapterPost.OnIte
                 pAdapterPost = new AdapterPost(MainActivity.this, pAdapdaterList);
                 pRecyclerView.setAdapter(pAdapterPost);
                 pAdapterPost.setOnItemClickListener(MainActivity.this);
+
             }
 
             @Override
@@ -159,8 +164,9 @@ public class MainActivity extends AppCompatActivity implements AdapterPost.OnIte
         });
     }
 
+
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(final int position) {
 
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         token =(mSharedPreference.getString("token", "Default_Value"));
@@ -180,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements AdapterPost.OnIte
                 public void onResponse(Call<Void> call, Response<Void> response) {
 
                     if(response.isSuccessful()){
-                        reiniciarActivity(MainActivity.this);
+                        fillPost();
                     }else{
                         Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                     }
@@ -197,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements AdapterPost.OnIte
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if(response.code() == 200 || !postClicked.isLiked()){
-                        reiniciarActivity(MainActivity.this);
+                        fillPost();
                     }else{
 
                         Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
